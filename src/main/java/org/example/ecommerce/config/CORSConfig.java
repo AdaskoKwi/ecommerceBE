@@ -13,7 +13,7 @@ public class CORSConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
-                        .allowedOrigins("http://localhost:*")
+                        .allowedOrigins("http://localhost:5173")
                         .allowedHeaders("*")
                         .allowCredentials(true);
             }
