@@ -22,6 +22,11 @@ public class ProductController {
         return productService.getProducts();
     }
 
+    @GetMapping("/{id}")
+    public Product getProductById(@PathVariable int id) {
+        return productService.getProductById(id);
+    }
+
     @PostMapping("/add")
     public void addProduct(@RequestBody Product product) {
         productService.addProduct(product);
