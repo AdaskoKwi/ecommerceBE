@@ -1,5 +1,6 @@
 package org.example.ecommerce.controller;
 
+import org.example.ecommerce.DTO.ProductRequest;
 import org.example.ecommerce.model.Product;
 import org.example.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,11 @@ public class ProductController {
         return productService.getProducts();
     }
 
+    @PostMapping("/search")
+    public List<Product> getProductBySearch(@RequestBody ProductRequest productRequest) {
+        return productService.getProductsBySearch(productRequest);
+    }
+
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable int id) {
         return productService.getProductById(id);
@@ -32,9 +38,19 @@ public class ProductController {
         productService.addProduct(product);
     }
 
+    @PostMapping("/add/collection")
+    public void addProducts(@RequestBody List<Product> products) {
+        productService.addProducts(products);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteProductById(@PathVariable int id) {
         productService.deleteProductById(id);
+    }
+
+    @DeleteMapping("/delete/all")
+    public void deleteAllProducts() {
+        productService.deleteAllProducts();
     }
 
     @PutMapping("/{id}")
