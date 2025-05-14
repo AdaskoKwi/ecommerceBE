@@ -44,4 +44,11 @@ public class CartService {
     public void deleteCartItems() {
         cartItemRepository.deleteAll();
     }
+
+    public void updateCartItemById(CartItem cartItem, int cartItemId) {
+        CartItem cartItemToUpdate = cartItemRepository.getReferenceById(cartItemId);
+        cartItemToUpdate.setAmountInCart(cartItem.getAmountInCart());
+
+        cartItemRepository.save(cartItemToUpdate);
+    }
 }
