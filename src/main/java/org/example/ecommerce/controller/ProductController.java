@@ -1,9 +1,11 @@
 package org.example.ecommerce.controller;
 
 import org.example.ecommerce.DTO.ProductRequest;
+import org.example.ecommerce.model.CartItem;
 import org.example.ecommerce.model.Product;
 import org.example.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -56,5 +58,10 @@ public class ProductController {
     @PutMapping("/{id}")
     public void updateProductById(@RequestBody Product product, @PathVariable int id) {
         productService.updateProductById(product, id);
+    }
+
+    @PutMapping("/update/collection")
+    public void updateProducts(@RequestBody List<CartItem> cartItems) {
+        productService.updateProducts(cartItems);
     }
 }

@@ -1,6 +1,7 @@
 package org.example.ecommerce.service;
 
 import org.example.ecommerce.DTO.ProductRequest;
+import org.example.ecommerce.model.CartItem;
 import org.example.ecommerce.model.Product;
 import org.example.ecommerce.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,5 +65,20 @@ public class ProductService {
         productToUpdate.setQuantity(product.getQuantity());
 
         productRepository.save(productToUpdate);
+    }
+
+    public void removeAmountFromCart(CartItem cartItem) {
+        Product productToUpdate = productRepository.getReferenceById(cartItem.getProduct().getId());
+
+        int decreasedQuantity = productToUpdate.getQuantity() - cartItem.getAmountInCart();
+        productToUpdate.setQuantity(decreasedQuantity);
+
+        productRepository.save(productToUpdate);
+    }
+
+    public void updateProducts(List<CartItem> cartItems) {
+        for (CartItem cartItem : cartItems) {
+            removeAmountFromCart(cartItem);
+        }
     }
 }
